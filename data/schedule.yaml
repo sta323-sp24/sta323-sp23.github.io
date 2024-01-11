@@ -3,25 +3,25 @@ dateFormat: 'Mon, Jan 2'
 schedule:
 
 
-- week: 1
+- week: 0
   day: 3
   lecture: "<i>No lecture - Monday schedule</i>"
 
-- week: 1
+- week: 0
   day: 5
   lecture: "Welcome & Syllabus"
-  slides: 
+  slides: Lec1
   screencast: 
   notes:
 
-- week: 2
+- week: 1
   day: 2
   lecture: "<i>No lab</i>"
   readings:
   - text: Happy Git and GitHub
     link: http://happygitwithr.com/
 
-- week: 2
+- week: 1
   day: 3
   lecture: "Types and Control Flow in R"
   slides: 
@@ -33,14 +33,14 @@ schedule:
     link: http://adv-r.had.co.nz/Data-structures.html
   notes:
 
-- week: 2
+- week: 1
   day: 5
   lecture: "Error checking, functions, and loops"
   slides: 
   screencast: 
   notes:
   
-- week: 3
+- week: 2
   day: 3
   lecture: "Lists, Attributes, & S3"
   slides: 
@@ -50,7 +50,7 @@ schedule:
     link: http://adv-r.had.co.nz/OO-essentials.html#s3
   notes: 
 
-- week: 3
+- week: 2
   day: 5
   lecture: "Matrices, data frames, & subsetting"
   slides: 
@@ -60,7 +60,7 @@ schedule:
     link: http://adv-r.had.co.nz/Subsetting.html
   notes: 
 
-- week: 4
+- week: 3
   day: 3
   lecture: "Tidy data & dplyr"
   slides: 
@@ -76,7 +76,7 @@ schedule:
   notes: 
 
 
-- week: 4
+- week: 3
   day: 5
   lecture: "tidyr"
   slides: 
@@ -88,7 +88,7 @@ schedule:
     link: https://tidyr.tidyverse.org/articles/rectangle.html
   notes:
 
-- week: 5
+- week: 4
   day: 3
   lecture: "Functional programming & purrr"
   slides: 
@@ -102,7 +102,7 @@ schedule:
     link: https://github.com/rstudio/cheatsheets/raw/master/purrr.pdf
   notes: 
 
-- week: 5
+- week: 4
   day: 5
   lecture: "ggplot2"
   slides: 
@@ -114,7 +114,7 @@ schedule:
     link: http://ggplot2.tidyverse.org/reference/index.html
   notes: 
 
-- week: 6
+- week: 5
   day: 3
   lecture: "Visualization Design"
   slides: 
@@ -122,7 +122,7 @@ schedule:
   readings:
   notes:
 
-- week: 6
+- week: 5
   day: 5
   lecture: "Text processing & Regular expressions"
   slides: 
@@ -136,7 +136,7 @@ schedule:
     link: https://r4ds.had.co.nz/strings.html
   notes: 
 
-- week: 7
+- week: 6
   day: 3
   lecture: "Web scraping"
   slides: 
@@ -146,7 +146,7 @@ schedule:
     link: https://rvest.tidyverse.org/articles/articles/selectorgadget.html
   notes: 
 
-- week: 7
+- week: 6
   day: 5
   lecture: "Web APIs"
   slides: 
@@ -157,7 +157,7 @@ schedule:
   - text: httr - Best practices for API packages
     link: https://httr.r-lib.org/articles/api-packages.html
 
-- week: 8
+- week: 7
   day: 3
   lecture: "filesystems, Dennys & LQ scraping"
   screencast: 
@@ -169,7 +169,7 @@ schedule:
     link: https://fs.r-lib.org/articles/function-comparisons.html
   notes: 
 
-- week: 8
+- week: 7
   day: 5
   lecture: "make"
   slides: 
@@ -181,7 +181,7 @@ schedule:
     link: https://bost.ocks.org/mike/make/
   notes: 
 
-- week: 9
+- week: 8
   day: 3
   lecture: "Databases & dplyr"
   slides: 
@@ -194,7 +194,7 @@ schedule:
   notes: 
   
 
-- week: 9
+- week: 8
   day: 5
   lecture: "SQL & Indexes"
   slides: 
@@ -206,21 +206,21 @@ schedule:
     link: https://gist.github.com/mattmc3/38a85e6a4ca1093816c08d4815fbebfb
 
 
-- week: 10
+- week: 9
   day: 2
   lecture: "<i>Spring break</i>"
 
-- week: 10
+- week: 9
   day: 3
   lecture: "<i>Spring break</i>"
 
-- week: 10
+- week: 9
   day: 5
   lecture: "<i>Spring break</i>"
 
 
 
-- week: 11
+- week: 10
   day: 3
   lecture: "Shiny"
   slides: 
@@ -234,7 +234,7 @@ schedule:
     link: https://mastering-shiny.org/
   notes: 
 
-- week: 11
+- week: 10
   day: 5
   lecture: "bslib & dashboards"
   slides: 
@@ -248,7 +248,7 @@ schedule:
     link: https://github.com/nanxstats/awesome-shiny-extensions
     
 
-- week: 12
+- week: 11
   day: 3
   lecture: "Profiling & Parallelization"
   slides: 
@@ -261,7 +261,7 @@ schedule:
   notes: 
 
 
-- week: 12
+- week: 11
   day: 5
   lecture: "Spatial data"
   slides: 
@@ -272,7 +272,7 @@ schedule:
   notes: 
   
 
-- week: 13
+- week: 12
   day: 3
   lecture: "Tidy Models"
   screencast: 
@@ -282,7 +282,7 @@ schedule:
     link: https://www.tidymodels.org/start/
   notes: 
 
-- week: 13
+- week: 12
   day: 5
   lecture: "More Tidy Models"
   screencast: 
@@ -291,7 +291,7 @@ schedule:
 
 
 
-- week: 14
+- week: 13
   day: 3
   lecture: "R Packages"
   slides: 
@@ -307,7 +307,7 @@ schedule:
     link: https://testthat.r-lib.org/
   notes: 
   
-- week: 14
+- week: 13
   day: 5
   lecture: "Rcpp"
   screencast: 
@@ -321,14 +321,14 @@ schedule:
   - text: Seamless R and C++ Integration with Rcpp
     link: https://link.springer.com/book/10.1007/978-1-4614-6868-4
 
-- week: 15
+- week: 14
   day: 3
   lecture: <i>TBD</i>
 
-- week: 15
+- week: 14
   day: 5
   lecture: <i>TBD</i>
 
-- week: 17
+- week: 16
   day: 2
   lecture: "<i>Final project due by 5 pm</i>"

@@ -13,13 +13,15 @@ schedule:
   slides: Lec1
   screencast: 
   notes:
+  readings:
+  - text: GitHub Auth Guide
+    link: https://github.com/DukeStatSci/github_auth_guide
+  - text: Happy Git and GitHub
+    link: http://happygitwithr.com/
 
 - week: 1
   day: 2
   lecture: "<i>No lab</i>"
-  readings:
-  - text: Happy Git and GitHub
-    link: http://happygitwithr.com/
 
 - week: 1
   day: 3

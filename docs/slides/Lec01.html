@@ -1472,6 +1472,11 @@ Dr. Colin Rundel
 <span id="cb1-5"><a href="#cb1-5"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You will need to do this configuration once on each machine in which you use git (e.g. the server and your laptop).</p>
 <p>This can also be done via the terminal with,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;Colin Rundel&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;rundel@gmail.com&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">git</span> config <span class="at">--global</span> push.default simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 <aside><div>
 <p>All of these values will be saved in the <code>.gitconfig</code> file in your home directory</p>
@@ -1479,11 +1484,48 @@ Dr. Colin Rundel
 <section id="configure-git-verification" class="slide level2">
 <h2>Configure git verification</h2>
 <p>To verify you configured git correctly, run</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="|3,4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>usethis<span class="sc">::</span><span class="fu">git_sitrep</span>()</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="do">## Git config (global)</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="do">## ● Name: &#39;Colin Rundel&#39;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="do">## ● Email: &#39;rundel@gmail.com&#39;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="do">## ● Vaccinated: FALSE</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="do">## ℹ See `?git_vaccinate` to learn more</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="do">## ● Default Git protocol: &#39;https&#39;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="do">## GitHub</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="do">## ● Default GitHub host: &#39;https://github.com&#39;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="do">## ● Personal access token for &#39;https://github.com&#39;: &lt;unset&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="do">## x Call `gh_token_help()` for help configuring a token</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="do">## Git repo for current project</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="do">## ℹ No active usethis project</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>You should see output similar to above with your details.</p>
 </section>
 <section id="configure-ssh-and-github-authentication" class="slide level2">
 <h2>Configure SSH and GitHub (authentication)</h2>
 <p>We will be authenticating with GitHub using SSH via public / private keys. We can create a new key pair (if necessary) by running the following in RStudio’s <em>console</em>:</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="|1-4|6|7-16|10|18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="do">## No SSH key found. Generate one now? </span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="do">## </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="do">## 1: Yes</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="do">## 2: No</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="do">## </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="do">## Selection: 1</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="do">## Generating new RSA keyspair at: /home/guest/.ssh/id_rsa</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="do">## Your public key:</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="do">## </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="do">##  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/wH7pT3UXdOMJSX2wMaPVTyGnYkS8OPmcfjct6h8Q+44/9UG3sOibjjUCxIxVeCWAoYFB0rDI3/Ljf2EWozLlpeGzAe7xsg6A+MHtUObZnfzXSB/NnOhZymD2u8Nh+py07aojVdKAPBkRH3nHA+rljidc3gXZkqseetYEI1N79OQUshp2P+Qm6Vab4I5OCnfAwLFkR7Sw7J9hvZN1qUmM0DB0WTWSlNmPSMsASMe/6Nz30IRoBh35Z7tgF79rlIW385giCkEeD20Le9EOueGoTWarJWylE1RWnUyig2mZ9JK/rYTw4KBXacPhBwn+MgGC+r8xY5IEX78xkeXW9q2z #&lt;&lt;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="do">## </span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="do">## Please copy the line above to GitHub: https://github.com/settings/ssh/new</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="do">## Would you like to open a browser now? </span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="do">## </span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="do">## 1: Yes</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="do">## 2: No</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="do">## </span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="do">## Selection: 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
 <section id="testing-things-out" class="slide level2">
 <h2>Testing things out</h2>

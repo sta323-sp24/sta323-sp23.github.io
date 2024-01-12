@@ -265,6 +265,7 @@ You will need to do this configuration once on each machine in which you use git
 This can also be done via the terminal with,
 
 ```{bash eval=FALSE}
+#| echo: true
 git config --global user.name "Colin Rundel"
 git config --global user.email "rundel@gmail.com"
 git config --global push.default simple
@@ -280,6 +281,7 @@ All of these values will be saved in the `.gitconfig` file in your home director
 To verify you configured git correctly, run
 
 ```{r}
+#| echo: true
 #| eval: false
 #| code-line-numbers: "|3,4"
 usethis::git_sitrep()
@@ -311,6 +313,7 @@ credentials::ssh_setup_github()
 . . .
 
 ```{r}
+#| echo: true
 #| code-line-numbers: "|1-4|6|7-16|10|18"
 ## No SSH key found. Generate one now? 
 ## 

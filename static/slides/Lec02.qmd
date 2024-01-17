@@ -30,17 +30,19 @@ options(
 
 ## Vectors
 
-The fundamental building block of data in R are vectors (collections of related values, objects, data structures, etc). 
+The fundamental building block of data in R are vectors (collections of related values, objects, etc). 
 
 . . .
 
+<br/>
+
 R has two types of vectors (that everything is built on):
 
-* **atomic** vectors (*vectors*)
+* atomic vectors (*vectors*)
 
     - homogeneous collections of the *same* type (e.g. all `true`/`false` values, all numbers, or all character strings).
 
-* **generic** vectors (*lists*)
+* generic vectors (*lists*)
   
     - heterogeneous collections of *any* type of R object, even other lists
     (meaning they can have a hierarchical/tree-like structure).
@@ -497,14 +499,9 @@ FALSE & NA
 ```
 :::
 
-::: {.column width='50%' .fragment
+::: {.column width='50%' .fragment}
 ```{r}
 TRUE | NA
-```
-
-. . .
-
-```{r}
 FALSE | NA
 ```
 :::
@@ -521,8 +518,6 @@ These are defined as part of the IEEE floating point standard (not unique to R)
 * `Inf` - Positive infinity
 
 * `-Inf` - Negative infinity
-
-<br/>
 
 :::: {.columns}
 ::: {.column width='50%'}
@@ -827,7 +822,7 @@ y %in% x
 
 . . .
 
-Type coercion also applies for comparison opperators which can result in *interesting behavior*
+Type coercion also applies for comparison opperators which can result in *interesting* behavior
 
 :::: {.columns}
 ::: {.column width='50%'}
@@ -869,7 +864,7 @@ c("Alice", "Bob", "Carol") <= "B"
 ::::
 
 ::: {.aside}
-Note - to better understand how this works / the ordering used take a look at [ASCII code](https://www.ascii-code.com/)
+Note - to better understand how this works, i.e. the ordering used, see [ASCII code](https://www.ascii-code.com/)
 :::
 
 
@@ -1029,7 +1024,7 @@ if (x < 0) {
 
 
 
-## `if` and `return`
+## `if` return values
 
 R's `if` conditional statements return a value (invisibly), the two following implementations are equivalent.
 

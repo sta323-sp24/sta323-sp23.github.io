@@ -1838,15 +1838,16 @@ Dr. Colin Rundel
 </section>
 <section id="vectors" class="slide level2">
 <h2>Vectors</h2>
-<p>The fundamental building block of data in R are vectors (collections of related values, objects, data structures, etc).</p>
+<p>The fundamental building block of data in R are vectors (collections of related values, objects, etc).</p>
 <div class="fragment">
+<p><br></p>
 <p>R has two types of vectors (that everything is built on):</p>
 <ul>
-<li><p><strong>atomic</strong> vectors (<em>vectors</em>)</p>
+<li><p>atomic vectors (<em>vectors</em>)</p>
 <ul>
 <li>homogeneous collections of the <em>same</em> type (e.g. all <code>true</code>/<code>false</code> values, all numbers, or all character strings).</li>
 </ul></li>
-<li><p><strong>generic</strong> vectors (<em>lists</em>)</p>
+<li><p>generic vectors (<em>lists</em>)</p>
 <ul>
 <li>heterogeneous collections of <em>any</em> type of R object, even other lists (meaning they can have a hierarchical/tree-like structure).</li>
 </ul></li>
@@ -2495,19 +2496,19 @@ Dr. Colin Rundel
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
-</div><p>::: {.column width=‘50%’ .fragment</p><div class="cell">
+</div><div class="column fragment" style="width:50%;">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb171"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb171-1"><a href="#cb171-1"></a><span class="cn">TRUE</span> <span class="sc">|</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-</div><p>. . .</p><div class="cell">
 <div class="sourceCode cell-code" id="cb173"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1"></a><span class="cn">FALSE</span> <span class="sc">|</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 </div>
-<p>::::</p>
+</div>
 </div>
 </section>
 <section id="other-special-values-double" class="slide level2">
@@ -2518,7 +2519,6 @@ Dr. Colin Rundel
 <li><p><code>Inf</code> - Positive infinity</p></li>
 <li><p><code>-Inf</code> - Negative infinity</p></li>
 </ul>
-<p><br></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -2679,7 +2679,7 @@ Dr. Colin Rundel
 
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_752cb9bc" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_18783e45" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
@@ -2980,7 +2980,7 @@ Dr. Colin Rundel
 </div>
 </div>
 <div class="fragment">
-<p>Type coercion also applies for comparison opperators which can result in <em>interesting behavior</em></p>
+<p>Type coercion also applies for comparison opperators which can result in <em>interesting</em> behavior</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -3046,7 +3046,7 @@ Dr. Colin Rundel
 </div>
 
 <aside><div>
-<p>Note - to better understand how this works / the ordering used take a look at <a href="https://www.ascii-code.com/">ASCII code</a></p>
+<p>Note - to better understand how this works, i.e. the ordering used, see <a href="https://www.ascii-code.com/">ASCII code</a></p>
 </div></aside></section>
 <section id="conditional-control-flow" class="slide level2">
 <h2>Conditional Control Flow</h2>
@@ -3213,8 +3213,8 @@ Dr. Colin Rundel
 </div>
 </div>
 </section>
-<section id="if-and-return" class="slide level2">
-<h2><code>if</code> and <code>return</code></h2>
+<section id="if-return-values" class="slide level2">
+<h2><code>if</code> return values</h2>
 <p>R’s <code>if</code> conditional statements return a value (invisibly), the two following implementations are equivalent.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -3289,7 +3289,7 @@ Dr. Colin Rundel
 
 <div class="cell">
 <div class="cell-output-display">
-<div class="countdown" id="timer_4002302b" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
+<div class="countdown" id="timer_12520a11" data-update-every="1" tabindex="0" style="right:0;bottom:0;">
 <div class="countdown-controls"><button class="countdown-bump-down">−</button><button class="countdown-bump-up">+</button></div>
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>

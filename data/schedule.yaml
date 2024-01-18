@@ -1,4 +1,4 @@
-startdate: "2024-01-07"
+startdate: "2024-01-14"
 dateFormat: 'Mon, Jan 2'
 schedule:
 
@@ -38,7 +38,7 @@ schedule:
 - week: 1
   day: 5
   lecture: "Error checking, functions, and loops"
-  slides: 
+  slides: Lec03
   screencast: 
   notes:
   

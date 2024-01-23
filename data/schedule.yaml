@@ -45,7 +45,7 @@ schedule:
 - week: 2
   day: 3
   lecture: "Lists, Attributes, & S3"
-  slides: 
+  slides: Lec04
   screencast: 
   readings:
   - text: Adv R - OO Field Guide - S3

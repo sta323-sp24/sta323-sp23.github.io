@@ -30,9 +30,11 @@ options(
 
 Lists are the other vector data structure in R, they differ from atomic vectors in that they can contain a heterogeneous collection of R object (e.g. atomic vectors, functions, other lists, etc.).
 
+::: small
 ```{r}
 list("A", c(TRUE,FALSE), (1:4)/2, list(TRUE, 1), function(x) x^2)
 ```
+:::
 
 
 ## List Structure
@@ -54,7 +56,7 @@ str("A")
 str( list(
   "A", c(TRUE,FALSE), 
   (1:4)/2, list(TRUE, 1), 
-  sum
+  function(x) x^2 
 ) )
 ```
 :::
@@ -87,7 +89,7 @@ str( c(1, list(4, list(6, 7))) )
 ```
 :::
 
-::: {.column width='50%'}
+::: {.column width='50%' .fragment}
 ```{r}
 str( list(1, list(4, list(6, 7))) )
 ```
@@ -124,13 +126,54 @@ str(list(A = 1, B = list(C = 2, D = 3)))
 
 . . .
 
-More complex names (i.e. non-valid object names) are allowed but must be quoted,
+More complex names (i.e. non-valid object names) must be quoted,
 
 ::: medium
 ```{r}
 list("knock knock" = "who's there?")
 ```
 :::
+
+## Variable names vs. value names
+
+::: medium
+We have seen how to assign a name to an R object (via `=` or `<-`). The general rule for these names is that it must start with a letter (upper or lower) or a `.` and then be followed additional letters, numbers, `.` or `_`. 
+
+These names are unambiguous to the interpreter / parser and so do not need any additional decoration. However if you want to use a name that does not follow these rules (e.g. `knock knock`), then you must quote it using backticks.
+:::
+
+:::: {.columns .small}
+::: {.column width='33%'}
+```{r}
+#| error: true
+a b = 1
+a b
+```
+:::
+
+::: {.column width='33%'}
+```{r}
+#| error: true
+"a b" = 1
+"a b"
+```
+:::
+
+::: {.column width='33%'}
+```{r}
+`a b` = 1
+`a b`
+```
+:::
+::::
+
+. . . 
+
+::: medium
+Vector (atomic or generic) names can be any valid R character vector values (as this is how they are stored) but there are a number of circumstances where we use them like a variable name (e.g. `mtcars$mpg`), and so it is a good idea to avoid using names that violate the object naming rules to avoid having to use backticks all the time (e.g. `x$&#96;knock knock\&#96;`).
+:::
+
+
 
 ## Exercise 1
 
@@ -286,7 +329,7 @@ The last example works due to short circuit evaluation which occurs with `&&` an
 
 ## Attributes
 
-Attributes are metadata that can be attached to objects in R. Some are special ( e.g. `class`, `comment`, `dim`, `dimnames`, `names`, ...) and they change the behavior of the object(s).
+Attributes are metadata that can be attached to objects in R. Some are special ( e.g. `class`, `comment`, `dim`, `dimnames`, `names`, ...) as they change the behavior of the object(s).
 
 . . .
 

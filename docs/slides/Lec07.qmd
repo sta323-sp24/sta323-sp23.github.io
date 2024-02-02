@@ -141,6 +141,25 @@ pivot_wider(
 ::::
 
 
+## Exercise 1
+
+::: {.medium}
+The `palmerpenguin` package contains measurement data on various penguin species on islands near Palmer Station in Antarctica. The code below shows the # of each species measured on each of the three islands (missing island, penguin pairs implies that species does not occur on that island).
+
+```{r}
+palmerpenguins::penguins |>
+  count(island, species)
+```
+
+Starting from these data construct a contingency table of counts for island (rows) by species (columns) using the pivot functions we've just discussed.
+:::
+
+```{r}
+#| echo: false
+countdown::countdown(5)
+```
+
+
 ## Separate - wider
 
 ```{r}
@@ -370,23 +389,7 @@ grades |>
 ```
 :::
 
-## Exercise 1
 
-::: {.medium}
-The `palmerpenguin` package contains measurement data on various penguin species on islands near Palmer Station in Antarctica. The code below shows the # of each species measured on each of the three islands (missing island, penguin pairs implies that species does not occur on that island).
-
-```{r}
-palmerpenguins::penguins |>
-  count(island, species)
-```
-
-Starting from these data construct a contingency table of counts for island (rows) by species (columns) using the pivot functions we've just discussed.
-:::
-
-```{r}
-#| echo: false
-countdown::countdown(5)
-```
 
 # Rectangling
 
@@ -412,11 +415,16 @@ View(repurrrsive::sw_people)
 
 ## Tidy data from nested lists
 
-Recent versions of `tidyr` have added several functions that are designed to aide in the tidying of hierarchical data. Since they are part of `tidyr` all of the following functions work with data frames.
+In addition to `pivot_*` the `tidyr` package also has a number of functions that are designed to aide in the tidying of hierarchical / nested data. 
 
-From `hoist()`, `unnest_longer()`, and `unnest_wider()` provide tools for rectangling, collapsing deeply nested lists into regular columns.
+For today we will be discussing the `unnest_longer()`, and `unnest_wider()` functions and next week we will see `hoist()`.
 
-## Lists as columns
+Much like the functions we saw last time in `dplyr`, these functions are designed to work with data frames (which may seem odd at first).
+
+
+## List columns
+
+We can make `sw_people` into a data frame by treating the original list as a single column in a data frame.
 
 :::: {.columns .small}
 ::: {.column width='50%'}
@@ -426,25 +434,10 @@ From `hoist()`, `unnest_longer()`, and `unnest_wider()` provide tools for rectan
 ))
 ```
 :::
-::: {.column width='50%'}
+
+::: {.column width='50%' .fragment}
 ```{r}
 as.data.frame(sw_df) |> head()
-```
-:::
-::::
-
-. . .
-
-:::: {.columns .small}
-::: {.column width='50%'}
-```{r}
-is.data.frame(sw_df)
-```
-:::
-
-::: {.column width='50%'}
-```{r}
-nrow(sw_df)
 ```
 :::
 ::::
@@ -455,12 +448,25 @@ nrow(sw_df)
 
 ## Unnesting
 
-::: {.medium}
+::: {.small}
 ```{r}
 sw_df |>
   unnest_wider(people)
 ```
 :::
+
+
+## Unnesting - column types
+
+::: {.small}
+```{r}
+sw_df |>
+  unnest_wider(people) |>
+  pull(height)
+```
+:::
+
+
 
 ## More list columns
 
@@ -472,7 +478,7 @@ sw_df |>
   select(name, starships)
 ```
 :::
-::: {.column width='50%'}
+::: {.column width='50%' .fragment}
 ```{r}
 sw_df |>
   unnest_wider(people) |> 
@@ -504,6 +510,17 @@ unnest_wider(sw_df, people) |>
 )
 ```
 :::
+
+## General advice
+
+* If there is a consistent set of entries (usually named) in the list column, use `unnest_wider()`
+
+* If there is an inconsistent set of entries (usually unnamed) in the list column, use `unnest_longer()`
+
+* Never use just `unnest()` - it can be inconsistent depending on input data
+
+* Think about if you need all the data or not - `unnest_*()` are not always the best choice
+
 
 # Aside - Joins
 
@@ -553,12 +570,12 @@ To specify the columns to join by (or to handle non-matching names) pass in a ch
 
 . . .
 
-More recently more advanced joins have been allowed via the `join_by()` construct which alllows for: equality, inequality, rolling, overlap, and cross joins. See `?join_by` for details.
+More recently more advanced joins have been allowed via the `join_by()` construct which allows for: equality, inequality, rolling, overlap, and cross joins. See `?join_by` for details.
 
 
 ## Joining people and starships
 
-::: {.middle}
+::: {.medium}
 ```{r}
 sw_df |>
   unnest_wider(people) |> 

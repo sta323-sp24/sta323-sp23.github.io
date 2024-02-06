@@ -93,7 +93,7 @@ schedule:
 - week: 4
   day: 3
   lecture: "Functional programming & purrr"
-  slides: 
+  slides: Lec08
   screencast: 
   readings:
   - text: Purrr tutorial

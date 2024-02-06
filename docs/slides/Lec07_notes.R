@@ -27,34 +27,6 @@ grades |>
   )
 
 
-## Summarize and .groups = "drop"
-
-d = tibble::tribble(
-  ~country, ~year,   ~type, ~count,
-  "A",  1999, "cases", "0.7K",
-  "A",  1999,   "pop",  "19M",
-  "A",  2000, "cases",   "2K",
-  "A",  2000,   "pop",  "20M",
-  "B",  1999, "cases",  "37K",
-  "B",  1999,   "pop", "172M",
-  "B",  2000, "cases", " 80K",
-  "B",  2000,   "pop", "174M",
-  "C",  1999, "cases", "212K",
-  "C",  1999,   "pop",   "1T",
-  "C",  2000, "cases", "213K",
-  "C",  2000,   "pop",   "1T"
-)
-
-d |>
-  group_by(country, year) |>
-  summarize(
-    n = n(),
-    .groups = "keep"
-  ) |>
-  summarize(
-    n = n()
-  )
-
 
 ## Exercise 1
 

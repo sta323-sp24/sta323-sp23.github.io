@@ -30,9 +30,9 @@ library(repurrrsive)
 
 ## Functions as objects
 
-We have mentioned in passing that in R functions are treated as 1st class objects (like vectors), meaning they can be assigned names, stored in lists, etc.
+We have mentioned in passing that in R functions are treated as 1st class objects (like vectors), meaning they can be assigned names, stored in lists, passed as arguments, etc.
 
-:::: {.columns}
+:::: {.columns .medium}
 ::: {.column width='50%'}
 ```{r}
 f = function(x) {
@@ -109,7 +109,8 @@ integrate(function(x) x^2-2*x+1, 0, 1)
 
 Along with the base pipe (`|>`), R v4.1.0 introduced a shortcut for anonymous functions using `\()`,
 
-::: {.small}
+:::: {.columns .small}
+::: {.column width='50%'}
 ```{r}
 (\(x) {1+x})(1:5)
 ```
@@ -123,16 +124,31 @@ integrate(\(x) sin(x)^2, 0, 1)
 ```
 :::
 
+::: {.column width='50%'}
+```{r}
+(function(x) {1+x})(1:5)
+```
+
+```{r}
+(function(x) x^2)(10)
+```
+
+```{r}
+integrate(function(x) sin(x)^2, 0, 1)
+```
+:::
+::::
+
 . . .
 
 
-Use of this with the base pipe helps avoid the need for `_`, e.g.
+Use of this with the base pipe helps avoid the need for `_`,
 
 ::: {.small}
 ```{r}
 #| output-location: column
 data.frame(x = runif(10), y = runif(10)) |>
-  {\(d) lm(y~x, data = d)}()
+  (\(d) lm(y~x, data = d))()
 ```
 :::
 
@@ -203,14 +219,6 @@ lapply(1:8, function(x, pow) x^pow, x=2) |>
 :::
 ::::
 
-::: {.medium}
-:::
-
-. . .
-
-::: {.medium}
-
-:::
 
 ## sapply
 
@@ -222,11 +230,21 @@ Usage: `sapply(X, FUN, ..., simplify = TRUE, USE.NAMES = TRUE)`
 
 ```{r}
 sapply(1:8, sqrt)
+```
+
+. . .
+
+```{r}
 sapply(1:8, function(x) (x+1)^2)
+```
+
+. . .
+
+```{r}
 sapply(1:8, function(x) c(x, x^2, x^3))
 ```
 
-## Legnth mismatch?
+## Length mismatch?
 
 :::: {.columns}
 ::: {.column width='50%'}
@@ -550,6 +568,17 @@ map2_dbl(1:5, 1:5, ~ ..1/(..2+1))
 
 ```{r}
 map2_chr(LETTERS[1:5], letters[1:5], paste0)
+```
+
+## imap functions
+
+purrr also contains a collection of `imap` prefixed functions which are short hand for mapping over an object and the indexes of that object (i.e. `seq_along(obj)`).
+
+```{r}
+iwalk(
+  letters[1:5],
+  ~cat("index: ", .y, ", value: ", .x, "\n", sep="")  
+)
 ```
 
 

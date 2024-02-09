@@ -116,37 +116,6 @@ options(width = 65)
 ::::
 
 
-## A basic ggplot
-
-:::: {.columns .small}
-::: {.column width='50%'}
-```{r penguins, fig.show = "hide"}
-ggplot(
-  data = penguins, 
-  mapping = aes(
-    x = bill_depth_mm, 
-    y = bill_length_mm
-  )
-) +
-  geom_point() +
-  labs(
-    title = "Bill depth and length",
-    subtitle = paste(
-      "Dimensions for Adelie, Chinstrap,",
-      "and Gentoo Penguins"
-    ),
-    x = "Bill depth (mm)", 
-    y = "Bill length (mm)",
-    color = "Species"
-  )
-```
-:::
-::: {.column width='50%'}
-```{r ref.label = "penguins", echo = FALSE, warning = FALSE, out.width = "100%", fig.width = 8}
-```
-:::
-::::
-
 
 
 # Text <-> Plot
@@ -492,49 +461,6 @@ ggplot(
 :::
 
 
-## Argument names
-
-Often we omit the `data` and `mapping` argument names when building plots with `ggplot()`.
-
-:::: {.columns}
-::: {.column width='50%'}
-```{r named-args, eval = FALSE}
-ggplot(
-  data = penguins,
-  mapping = aes(
-    x = bill_depth_mm,
-    y = bill_length_mm
-  )
-) +
-  geom_point(
-    mapping = aes(color = species)
-  ) +
-  scale_color_viridis_d()
-```
-:::
-::: {.column width='50%'}
-```{r not-named-args, eval = FALSE}
-ggplot(
-  penguins,
-  aes(
-    x = bill_depth_mm,
-    y = bill_length_mm
-  )
-) +
-  geom_point(
-    aes(color = species)
-  ) +
-  scale_color_viridis_d()
-```
-:::
-::::
-
-::: {.aside}
-*Note* that `ggplot` and `geom_*` swap the order of the `data` and `mapping` arguments.
-:::
-
-
-
 # Aesthetics
 
 
@@ -548,7 +474,7 @@ Commonly used characteristics of plotting geometries that can be **mapped to a s
 - `size`
 - `alpha` (transparency)
 
-Different geometries have different aesthetics availablle - see the [ggplot2 geoms](https://ggplot2.tidyverse.org/reference/index.html#Geoms) help files for listings.
+Different geometries have different aesthetics available - see the [ggplot2 geoms](https://ggplot2.tidyverse.org/reference/index.html#Geoms) help files for listings.
 
 
 * Aesthetics given in `ggplot()` apply to all `geom`s.

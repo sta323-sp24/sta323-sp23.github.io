@@ -119,7 +119,7 @@ schedule:
 - week: 5
   day: 3
   lecture: "Visualization Design"
-  slides: 
+  slides: Lec10
   screencast: 
   readings:
   notes:

@@ -460,6 +460,23 @@ simpsons |>
 </iframe>
 
 
+##
+
+<br/><br/><br/><br/>
+
+::: {.center .xlarge}
+[gapminder.org](https://www.gapminder.org/)
+:::
+
+<br/><br/><br/><br/>
+
+::: {.center .xlarge}
+[gapminder.org/dollar-street](https://www.gapminder.org/dollar-street)
+:::
+
+
+
+
 ## Keep it simple
 
 <br/>
@@ -472,9 +489,11 @@ knitr::include_graphics("imgs/pie-3d.jpg")
 :::
 
 ::: {.column width="50%"}
-<br/> <br/>
-
+<br/>
 ```{r pie-to-bar, echo=FALSE, out.width="100%"}
+#| fig-width: 5
+#| fig-height: 4
+
 d <- tribble(
   ~category,                     ~value,
   "Cutting tools"                , 0.03,
@@ -515,6 +534,9 @@ knitr::include_graphics("imgs/caveat_pie2.png")
 ::: columns
 ::: {.column width="50%"}
 ```{r echo=FALSE, out.width="100%"}
+#| fig-width: 5
+#| fig-height: 4
+
 d |>
   mutate(category = str_replace(category, " ", "\n")) |>
   ggplot(aes(x = category, y = value, fill = category)) +
@@ -527,6 +549,9 @@ d |>
 
 ::: {.column width="50%"}
 ```{r echo=FALSE, out.width="100%"}
+#| fig-width: 5
+#| fig-height: 4
+
 ggplot(d, aes(x = fct_reorder(category, value), y = value, fill = category)) +
   geom_col() +
   theme_minimal() +

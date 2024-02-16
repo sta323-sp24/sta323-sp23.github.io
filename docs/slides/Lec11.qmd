@@ -36,11 +36,11 @@ library(tidyverse)
 
 ## Base R string functions
 
-As you have likely noticed, the individual characters in a string (element of a character vector) cannot be directly accessed. The base language provides a number helper functions for pattern matching and manipulation of these objects:
+As you have likely noticed, the individual characters in a string (element of a character vector) cannot be directly accessed. The base R provides a number helper functions for pattern matching and manipulation of these strings:
 
 - `paste()`, `paste0()` - concatenate strings
 - `substr()`, `substring()` - extract or replace substrings
-- `sprintf()` - C-like string construction
+- `sprintf()`, `formatC()` - C-like string formatting
 - `nchar()` - counts characters
 - `strsplit()` - split a string into substrings 
 - `grep()`, `grepl()` - regular expression pattern matching
@@ -50,7 +50,7 @@ As you have likely noticed, the individual characters in a string (element of a 
 
 ##
 
-![](imgs/hex-stringr.png){fig-align="center" width="100%"}
+![](imgs/hex-stringr.png){width=10% fig-align="center" }
 
 ## Fixed width strings - `str_pad()`
 
@@ -73,32 +73,51 @@ str_pad(10^(0:5), width = 8, side = "right") |>
 ::: {.column width='50%'}
 ```{r}
 cat(10^(0:5), sep="\n")
-formatC(10^(0:5), digits = 6, width = 6) |>
+formatC(
+  10^(0:5), digits = 6, width = 6
+) |>
   cat(sep="\n")
 ```
 :::
 ::: {.column width='50%'}
 ```{r}
 cat(1/10^(0:5), sep="\n")
-formatC(1/10^(0:5), digits = 6, width = 6, format = "fg") |> 
+formatC(
+  1/10^(0:5), digits = 6, width = 6, format = "fg"
+) |> 
   cat(sep="\n")
 ```
 :::
 ::::
 
 
-## Whitespace cleaning - `str_trim()`,`str_squish()`
+## Whitespace trimming - `str_trim()`, `str_squish()`
 
 ```{r}
 (x = c("   abc" , "ABC   " , " Hello.  World "))
 ```
 
-<p></p>
+. . .
 
 ```{r}
 str_trim(x)
+```
+
+. . . 
+
+```{r}
 str_trim(x, side="left")
+```
+
+. . . 
+
+```{r}
 str_trim(x, side="right")
+```
+
+. . . 
+
+```{r}
 str_squish(x)
 ```
 
@@ -109,11 +128,21 @@ str_squish(x)
 x = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 ```
 
-<p></p>
+. . .
 
 ```{r}
 str_trunc(x, width=60)
+```
+
+. . . 
+
+```{r}
 str_trunc(x, width=60, side = "left")
+```
+
+. . . 
+
+```{r}
 str_trunc(x, width=60, side = "center")
 ```
 
@@ -126,8 +155,6 @@ cat(x)
 
 . . .
 
-<p></p>
-
 ```{r}
 str_wrap(x)
 ```
@@ -138,7 +165,7 @@ str_wrap(x)
 str_wrap(x) |> cat()
 ```
 
-<p></p>
+. . .
 
 ```{r}
 str_wrap(x, width=60) |> cat()
@@ -184,10 +211,27 @@ str_glue_data(
 x = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 ```
 
+. . .
+
 ```{r}
 str_to_lower(x)
+```
+
+. . .
+
+```{r}
 str_to_upper(x)
+```
+
+. . .
+
+```{r}
 str_to_title(x)
+```
+
+. . .
+
+```{r}
 str_to_sentence(x)
 ```
 
@@ -195,8 +239,15 @@ str_to_sentence(x)
 # Regular Expressions
 
 
+## Regular expressions
 
-## Regular expression functions
+> A regular expression (shortened as regex or regexp), sometimes referred to as rational expression, is a sequence of characters that specifies a match pattern in text. Usually such patterns are used by string-searching algorithms for "find" or "find and replace" operations on strings, or for input validation. Regular expression techniques are developed in theoretical computer science and formal language theory.
+> 
+> The concept of regular expressions began in the 1950s, when the American mathematician Stephen Cole Kleene formalized the concept of a regular language. They came into common use with Unix text-processing utilities. Different syntaxes for writing regular expressions have existed since the 1980s, one being the POSIX standard and another, widely used, being the Perl syntax.
+>
+> *Source:* [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression)
+
+## stringr regular expression functions
 
 ::: {.medium}
 
@@ -221,7 +272,7 @@ Many of these functions have variants with an `_all` suffix (e.g. `str_replace_a
 
 ## Simple Pattern Detection
 
-::: {.medium}
+::: {.small}
 ```{r}
 text = c("The quick brown" , "fox jumps over" , "the lazy dog")
 ```
@@ -229,7 +280,7 @@ text = c("The quick brown" , "fox jumps over" , "the lazy dog")
 
 . . .
 
-:::: {.columns .medium}
+:::: {.columns .small}
 ::: {.column width='50%'}
 ```{r}
 str_detect(text, "quick")
@@ -244,7 +295,7 @@ str_subset(text, "quick")
 
 . . .
 
-:::: {.columns .medium}
+:::: {.columns .small}
 ::: {.column width='50%'}
 ```{r}
 str_detect(text, "o")
@@ -259,7 +310,7 @@ str_subset(text, "o")
 
 . . .
 
-:::: {.columns .medium}
+:::: {.columns .small}
 ::: {.column width='50%'}
 ```{r}
 str_detect(text, "row")
@@ -274,7 +325,7 @@ str_subset(text, "row")
 
 . . .
 
-:::: {.columns .medium}
+:::: {.columns .small}
 ::: {.column width='50%'}
 ```{r}
 str_detect(text, "the")
@@ -290,18 +341,18 @@ str_subset(text, "the")
 
 . . .
 
-:::: {.columns .medium}
+:::: {.columns .small}
 ::: {.column width='50%'}
 ```{r}
 str_detect(
-  text, regex("quick", ignore_case=TRUE)
+  text, regex("the", ignore_case=TRUE)
 )
 ```
 :::
 ::: {.column width='50%'}
 ```{r}
 str_subset(
-  text, regex("quick", ignore_case=TRUE)
+  text, regex("the", ignore_case=TRUE)
 )
 ```
 :::
@@ -448,7 +499,7 @@ The power of regular expressions comes from their ability to use special metacha
 
 . . .
 
-Because of their special properties they cannot be matched directly, if you need to match one you need to escape it first (precede it by `\`). 
+Because of their special properties they cannot be matched directly, if you need to match one you (may) need to escape it first (precede it by `\`). 
 
 . . .
 
@@ -514,7 +565,7 @@ knitr::include_graphics("imgs/xkcd_backslashes.png")
 
 ## Anchors
 
-Sometimes we want to specify that our pattern occurs at a particular location in a string, we indicate this using anchor metacharacters.
+Sometimes we want to specify that our pattern occurs at a particular location in a string, we indicate this using anchor metacharacters or specific regex escaped characters.
 
 <p></p>
 
@@ -634,7 +685,7 @@ When we want to match whole classes of characters at a time there are a number o
 
 <p></p>
 
-| Meta Char | Class | Description |
+| Meta char | Class | Description |
 |:----:|:------------|:-|
 | `.`  |             | Any character except new line (`\n`) | 
 | `\s` | `[:space:]` | White space |
@@ -689,7 +740,7 @@ str_detect(text, "\\(\\d\\d\\d\\) \\d\\d\\d-\\d\\d\\d\\d")
 
 ## Classes and Ranges
 
-We can also specify our own classes using square brackets
+We can also specify our own classes using square brackets, to simplify these classes ranges can be used for contiguous characters or numbers.
 
 <p></p>
 
@@ -723,13 +774,13 @@ str_replace_all(text, "[13579]" , "*")
 . . .
 
 ```{r}
-str_replace_all(text, "[1-5a-ep]" , "*")
+str_replace_all(text, "[1-5a-f]" , "*")
 ```
 
 . . .
 
 ```{r}
-str_replace_all(text, "[^1-5a-ep]" , "*")
+str_replace_all(text, "[^1-5a-f]" , "*")
 ```
 
 
@@ -912,7 +963,7 @@ Validating an email address:
 ```
 
 ::: {.aside}
-Behold the horror of an old school perl regex for email addresses [here](http://www.ex-parrot.com/~pdw/Mail-RFC822-Address.html)]
+Behold the horror of an old school perl regex for email addresses [here](http://www.ex-parrot.com/~pdw/Mail-RFC822-Address.html)
 :::
 
 

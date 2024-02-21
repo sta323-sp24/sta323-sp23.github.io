@@ -407,6 +407,6 @@ For the movies listed in **Popular Streaming Movies** list on `rottentomatoes.co
 
 ## Exercise 1
 
-Using the url for each movie, now go out and grab the number of reviews, the runtime, and number of user ratings.
+Using the url for each movie, now go out and grab the mpaa rating, the runtime and number of user ratings.
 
-If you finish that you can then try to scrape the MPAA rating and the audience score,.
+If you finish that you can then try to scrape the tomato meter and audience scores for each movie.

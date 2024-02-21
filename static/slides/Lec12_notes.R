@@ -3,6 +3,7 @@ library(tidyverse)
 
 ## Example
 url = "http://www.rottentomatoes.com/"
+
 (session = polite::bow(url))
 
 page = polite::scrape(session)
@@ -33,26 +34,40 @@ movies = tibble::tibble(
 
 ## Exercise 1
 
-#scrape_movie_page = function(url) {
-#  page = read_html(url)
-#  
-#  list(
-#    n_reviews = page |> 
-#      html_elements(".scoreboard__link--tomatometer") |>
-#      html_text2() |>
-#      str_remove(" Reviews") |>
-#      as.integer(),
-#    aud_ratings = page |>
-#      html_elements(".scoreboard__link--audience") |>
-#      html_text2() |>
-#      str_remove(" Ratings"),
-#    run_time = page |>
-#      html_elements(".scoreboard__info") |>
-#      html_text2() |>
-#      str_split(", ", simplify = TRUE) |>
-#      {.[,3]}
-#  )
-#}
+scrape_movie_page = function(url) {
+  
+  message("Scraping ", url)  
+  
+  page = polite::nod(session, url) |>
+    polite::scrape()
+  
+  list(
+    mpaa_rating = page |>
+      html_elements(".info-item:nth-child(1) span") |>
+      html_text2() |>
+      str_remove(" \\(.*\\)"),
+    
+    runtime = page |>
+      html_elements(".info-item:nth-child(10) time") |>
+      html_text2(),
+    
+    tomatometer_score = page |>
+      html_elements("#scoreboard") |>
+      html_attr("tomatometerscore") |>
+      as.integer(),
+    
+    audience_score = page |>
+      html_elements("#scoreboard") |>
+      html_attr("audiencescore") |>
+      as.integer(),
+
+    n_reviews = page |>
+      html_elements('#scoreboard > a[data-qa="tomatometer-review-count"]') |>
+      html_text2() |>
+      str_remove(" Reviews") |>
+      as.integer()
+  )
+}
 
 movies = movies |>
   mutate(
@@ -61,6 +76,5 @@ movies = movies |>
   unnest_wider(details)
 
 
-## Exercise 1 - Bonus - demo inspector and shutting off javascript
 
 

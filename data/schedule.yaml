@@ -141,7 +141,7 @@ schedule:
 - week: 6
   day: 3
   lecture: "Web scraping"
-  slides: 
+  slides: Lec12
   screencast: 
   readings:
   - text: rvest - selector gadget vignette

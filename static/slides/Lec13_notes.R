@@ -1,6 +1,6 @@
 library(tidyverse)
 
-# GoT - Books
+# GoT - Books ---------
 
 books = jsonlite::read_json("https://www.anapioficeandfire.com/api/books?pageSize=20")
 
@@ -9,7 +9,7 @@ books |>
   unnest_wider(books) |>
   View()
 
-# GoT - Houses
+# GoT - Houses ---------
 
 # Try none, 100 etc. pageSize
 
@@ -22,7 +22,7 @@ houses |>
   unnest_wider(houses) |>
   View()
 
-# Iteration
+## Iteration ----------
 
 full = list()
 page = 1
@@ -46,7 +46,8 @@ full |>
   View()
 
 
-## httr2
+
+## httr2 -----------
 
 library(httr2)
 
@@ -63,6 +64,9 @@ resp |>
   tibble(houses = _) |>
   unnest_wider(houses) |>
   View()
+
+
+## httr2 headers -------
 
 resp |> 
   resp_headers()
@@ -111,7 +115,7 @@ full |>
 
 
 
-### Exercises
+## Wrapper function -------
 
 
 aaoif = function(
@@ -158,13 +162,14 @@ h2 = aaoif("houses", pageSize=50)
 
 identical(h1, h2)
 
+## Exercises ------
 
-## 1.1 How many characters are included in this API?
+### 1.1 How many characters are included in this API? ----
 
 c = aaoif("characters", pageSize=50)
 nrow(c)
 
-## 1.2. What percentage of the characters are dead?
+### 1.2. What percentage of the characters are dead? ----
 
 sum(c$died != "") / nrow(c)
 
@@ -173,7 +178,7 @@ c_alive = aaoif("characters", pageSize=50, isAlive = TRUE)
 (nrow(c) - nrow(c_alive)) / (nrow(c))
 
   
-## 1.3. How many houses have an ancestral weapon?
+### 1.3. How many houses have an ancestral weapon? ----
 
 h = aaoif("houses", pageSize=50)
 
@@ -188,31 +193,34 @@ sum(has_weap)
 
 
 
-## GitHub example
+## GitHub example -----
 
-# https://docs.github.com/en/rest/overview/resources-in-the-rest-api#authentication
 
-r = request("https://api.github.com/user") |>
+### Org repos ------
+
+request("https://api.github.com/orgs/sta323-sp24/repos") |>
+  req_perform() |>
+  resp_body_json() |>
+  map_chr("full_name")
+
+request("https://api.github.com/orgs/sta323-sp24/repos") |>
   req_auth_bearer_token(gitcreds::gitcreds_get()$password) |>
-  req_perform()
+  req_perform() |>
+  resp_body_json() |>
+  map_chr("full_name")
 
-r
 
-r |> resp_body_json() |> str()
-
-## Create a gist example
+### Create a gist ----
 
 gist = request("https://api.github.com/gists") |>
-  req_headers(Authorization = paste("token", Sys.getenv("GITHUB_PAT"))) |>
+  req_auth_bearer_token(gitcreds::gitcreds_get()$password) |>
   req_body_json( list(
     description = "Testing 1 2 3 ...",
     files = list("test.R" = list(content = "print('hello world')\n")),
     public = TRUE
   ) ) |>
-  #req_dry_run()  
   req_perform()
 
-gist |>
-  resp_body_json()
+resp_body_json(gist)
 
-gist |> resp_headers()
+resp_body_json(gist)$html_url

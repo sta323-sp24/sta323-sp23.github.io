@@ -374,68 +374,6 @@ res_good |> resp_body_string()
 
 
 
-## Debugging base http via libcurl
-
-::: {.small}
-```{r}
-#| eval: false
-options(internet.info = 0)
-readLines(url("https://www.rottentomatoes.com"))
-```
-
-```
-* WARNING: failed to open cookie file ""
-*   Trying 23.223.142.65:443...
-* Connected to www.rottentomatoes.com (23.223.142.65) port 443 (#0)
-* ALPN: offers h2,http/1.1
-*  CAfile: /etc/ssl/cert.pem
-*  CApath: none
-* SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256
-* ALPN: server accepted h2
-* Server certificate:
-*  subject: C=US; ST=Pennsylvania; O=Comcast Corporation; CN=*.rottentomatoes.com
-*  start date: Mar 31 00:00:00 2023 GMT
-*  expire date: Mar 30 23:59:59 2024 GMT
-*  subjectAltName: host "www.rottentomatoes.com" matched cert's "*.rottentomatoes.com"
-*  issuer: C=GB; ST=Greater Manchester; L=Salford; O=COMODO CA Limited; CN=COMODO RSA Organization Validation Secure Server CA
-*  SSL certificate verify ok.
-* using HTTP/2
-* h2 [:method: GET]
-* h2 [:scheme: https]
-* h2 [:authority: www.rottentomatoes.com]
-* h2 [:path: /]
-* h2 [user-agent: RStudio Desktop (2023.9.0.463); R (4.3.1 aarch64-apple-darwin23.0.0 aarch64 darwin23.0.0)]
-* h2 [accept: */*]
-* Using Stream ID: 1 (easy handle 0x1573a0e00)
-> GET / HTTP/2
-Host: www.rottentomatoes.com
-User-Agent: RStudio Desktop (2023.9.0.463); R (4.3.1 aarch64-apple-darwin23.0.0 aarch64 darwin23.0.0)
-Accept: */*
-
-< HTTP/2 403 
-< mime-version: 1.0
-< content-type: text/html
-< content-length: 272
-< cache-control: max-age=0
-< expires: Fri, 13 Oct 2023 00:48:33 GMT
-< date: Fri, 13 Oct 2023 00:48:33 GMT
-* Added cookie akamai_generated_location="{"zip":"27601-27617+27619-27629+27634-27636+27640+27650+27656+27658+27661+27668+27675-27676+27690+27695+27697-27699","city":"RALEIGH","state":"NC","county":"WAKE","areacode":"919","lat":"35.7750","long":"-78.6336","countrycode":"US"}" for domain rottentomatoes.com, path /, expire 1699750113
-< set-cookie: akamai_generated_location={"zip":"27601-27617+27619-27629+27634-27636+27640+27650+27656+27658+27661+27668+27675-27676+27690+27695+27697-27699","city":"RALEIGH","state":"NC","county":"WAKE","areacode":"919","lat":"35.7750","long":"-78.6336","countrycode":"US"}; expires=Sun, 12-Nov-2023 00:48:33 GMT; path=/; domain=.rottentomatoes.com; secure
-< x-frame-options: SAMEORIGIN
-< strict-transport-security: max-age=31536000 ; includeSubDomains
-* Added cookie akacd_RTReplatform="2177452799~rv=88~id=c32ab070ed3d3c6433fcd5f301c4ab77" for domain www.rottentomatoes.com, path /, expire 2177452799
-< set-cookie: akacd_RTReplatform=2177452799~rv=88~id=c32ab070ed3d3c6433fcd5f301c4ab77; path=/; Expires=Mon, 31 Dec 2038 23:59:59 GMT; Secure; SameSite=None
-* The requested URL returned error: 403
-* Connection #0 to host www.rottentomatoes.com left intact
-Error in readLines(url("https://www.rottentomatoes.com")) : 
-  cannot open the connection to 'https://www.rottentomatoes.com'
-In addition: Warning message:
-In readLines(url("https://www.rottentomatoes.com")) :
-  cannot open URL 'https://www.rottentomatoes.com/': HTTP status was '403 Forbidden'
-```
-:::
-
-
 
 # Demo 2 - httr2 + headers
 
@@ -448,6 +386,13 @@ aaoif = function(
   base_url = "https://www.anapioficeandfire.com/api/", verbose = TRUE
 ) {
   resource = match.arg(resource)
+  
+  get_links = function(resp) {
+    resp |>
+      resp_header("link") |>
+      str_match_all('<(.*?)>; rel="([a-zA-Z]+)"') |>
+      (\(x) (setNames(as.list(x[[1]][,2]), x[[1]][,3])))()
+  }
   
   if (resource == "root")
     resource = ""
@@ -498,4 +443,19 @@ countdown::countdown(5)
 ```
 
 # Demo 3 - [GitHub API](https://docs.github.com/en/rest/overview)
+
+
+## GitHub API(s)
+
+GitHub provides two APIs for accessing the website and its data:
+
+* A REST api - [Getting started](https://docs.github.com/en/rest/using-the-rest-api/getting-started-with-the-rest-api?apiVersion=2022-11-28)
+
+* A GraphQL api - [About the GraphQL API](https://docs.github.com/en/graphql/overview/about-the-graphql-api)
+
+The REST api is more mature and provides access / interact with most of the data available on the website. The GraphQL api is more flexible and efficient, but is still under development and does not provide access to all the data available on the website.
+
+. . .
+
+To do almost anything useful with either API you will need to authenticate. This can be done via a [personal access token (PAT)](https://github.com/settings/tokens) which is then passed as part of the http request header.
 

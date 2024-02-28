@@ -161,6 +161,25 @@ schedule:
 
 - week: 7
   day: 3
+  lecture: "Building APIs with R (plumber)"
+  slides: Lec14
+  screencast:
+  readings:
+  - text: plumber documentation
+    link: https://www.rplumber.io/index.html
+  - text: plumber webinar
+    link: https://posit.co/resources/videos/expanding-r-horizons-integrating-r-with-plumber-apis/
+
+
+- week: 7
+  day: 5
+  lecture: TBD
+  slides:
+  screencast:
+  readings:
+
+- week: 8
+  day: 3
   lecture: "filesystems, Dennys & LQ scraping"
   screencast: 
   slides: 
@@ -171,7 +190,7 @@ schedule:
     link: https://fs.r-lib.org/articles/function-comparisons.html
   notes: 
 
-- week: 7
+- week: 8
   day: 5
   lecture: "make"
   slides: 
@@ -182,30 +201,6 @@ schedule:
   - text: Why use make
     link: https://bost.ocks.org/mike/make/
   notes: 
-
-- week: 8
-  day: 3
-  lecture: "Databases & dplyr"
-  slides: 
-  screencast: 
-  readings:
-  - text: SQL Translation
-    link: https://cran.r-project.org/web/packages/dbplyr/vignettes/sql-translation.html
-  - text: dbplyr Vignette
-    link: https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html
-  notes: 
-  
-
-- week: 8
-  day: 5
-  lecture: "SQL & Indexes"
-  slides: 
-  screencast: 
-  readings:
-  - text: SQLite Syntax
-    link: https://www.sqlite.org/lang.html
-  - text: Modern SQL Style Guide
-    link: https://gist.github.com/mattmc3/38a85e6a4ca1093816c08d4815fbebfb
 
 
 - week: 9
@@ -221,8 +216,33 @@ schedule:
   lecture: "<i>Spring break</i>"
 
 
+- week: 10
+  day: 3
+  lecture: "Databases & dplyr"
+  slides: 
+  screencast: 
+  readings:
+  - text: SQL Translation
+    link: https://cran.r-project.org/web/packages/dbplyr/vignettes/sql-translation.html
+  - text: dbplyr Vignette
+    link: https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html
+  notes: 
+  
 
 - week: 10
+  day: 5
+  lecture: "SQL & Indexes"
+  slides: 
+  screencast: 
+  readings:
+  - text: SQLite Syntax
+    link: https://www.sqlite.org/lang.html
+  - text: Modern SQL Style Guide
+    link: https://gist.github.com/mattmc3/38a85e6a4ca1093816c08d4815fbebfb
+
+
+
+- week: 11
   day: 3
   lecture: "Shiny"
   slides: 
@@ -236,7 +256,7 @@ schedule:
     link: https://mastering-shiny.org/
   notes: 
 
-- week: 10
+- week: 11
   day: 5
   lecture: "bslib & dashboards"
   slides: 
@@ -250,7 +270,7 @@ schedule:
     link: https://github.com/nanxstats/awesome-shiny-extensions
     
 
-- week: 11
+- week: 12
   day: 3
   lecture: "Profiling & Parallelization"
   slides: 
@@ -263,7 +283,7 @@ schedule:
   notes: 
 
 
-- week: 11
+- week: 12
   day: 5
   lecture: "Spatial data"
   slides: 
@@ -274,7 +294,7 @@ schedule:
   notes: 
   
 
-- week: 12
+- week: 13
   day: 3
   lecture: "Tidy Models"
   screencast: 
@@ -284,7 +304,7 @@ schedule:
     link: https://www.tidymodels.org/start/
   notes: 
 
-- week: 12
+- week: 13
   day: 5
   lecture: "More Tidy Models"
   screencast: 
@@ -293,7 +313,7 @@ schedule:
 
 
 
-- week: 13
+- week: 14
   day: 3
   lecture: "R Packages"
   slides: 
@@ -309,7 +329,7 @@ schedule:
     link: https://testthat.r-lib.org/
   notes: 
   
-- week: 13
+- week: 14
   day: 5
   lecture: "Rcpp"
   screencast: 
@@ -323,13 +343,6 @@ schedule:
   - text: Seamless R and C++ Integration with Rcpp
     link: https://link.springer.com/book/10.1007/978-1-4614-6868-4
 
-- week: 14
-  day: 3
-  lecture: <i>TBD</i>
-
-- week: 14
-  day: 5
-  lecture: <i>TBD</i>
 
 - week: 16
   day: 2

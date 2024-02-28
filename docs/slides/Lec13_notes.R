@@ -27,7 +27,7 @@ houses |>
 full = list()
 page = 1
 repeat {
-  cat("Grabbing page", page, "\n")
+  message("Grabbing page", page)
   houses = jsonlite::read_json( paste0(
     "https://www.anapioficeandfire.com/api/houses?",
     "pageSize=50&page=", page
@@ -95,7 +95,7 @@ full = list()
 page = 1
 
 repeat {
-  cat("Grabbing page", page, "\n")
+  message("Grabbing page", page)
   full = c(full, resp_body_json(resp))
   
   links = get_links(resp)
@@ -138,7 +138,7 @@ aaoif = function(
   page = 1
   
   repeat {
-    if (verbose) cat("Grapping page", page, "\n")
+    if (verbose) message("Grapping page", page)
     full = c(full, resp_body_json(resp))
     
     links = get_links(resp)

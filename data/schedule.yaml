@@ -170,16 +170,8 @@ schedule:
   - text: plumber webinar
     link: https://posit.co/resources/videos/expanding-r-horizons-integrating-r-with-plumber-apis/
 
-
 - week: 7
   day: 5
-  lecture: TBD
-  slides:
-  screencast:
-  readings:
-
-- week: 8
-  day: 3
   lecture: "filesystems, Dennys & LQ scraping"
   screencast: 
   slides: 
@@ -191,7 +183,7 @@ schedule:
   notes: 
 
 - week: 8
-  day: 5
+  day: 3
   lecture: "make"
   slides: 
   screencast: 
@@ -202,6 +194,12 @@ schedule:
     link: https://bost.ocks.org/mike/make/
   notes: 
 
+- week: 8
+  day: 5
+  lecture: TBD
+  slides:
+  screencast:
+  readings:
 
 - week: 9
   day: 2

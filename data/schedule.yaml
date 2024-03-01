@@ -174,7 +174,7 @@ schedule:
   day: 5
   lecture: "filesystems, Dennys & LQ scraping"
   screencast: 
-  slides: 
+  slides: Lec15
   readings:
   - text: Project-oriented workflow
     link: https://rstats.wtf/project-oriented-workflow.html

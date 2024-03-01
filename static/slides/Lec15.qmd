@@ -1,6 +1,6 @@
 ---
 title: "Filesystems &<br/> Denny's + LQ scraping"
-subtitle: "Lecture 14"
+subtitle: "Lecture 15"
 author: "Dr. Colin Rundel"
 footer: "Sta 323 - Spring 2024"
 format:

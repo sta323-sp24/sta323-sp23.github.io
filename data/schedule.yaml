@@ -180,7 +180,7 @@ schedule:
     link: https://rstats.wtf/project-oriented-workflow.html
   - text: fs comparison
     link: https://fs.r-lib.org/articles/function-comparisons.html
-  notes: 
+  notes: <a href="https://youtu.be/CfgnwfgiuoA">Scraping details</a>
 
 - week: 8
   day: 3

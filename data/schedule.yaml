@@ -185,7 +185,7 @@ schedule:
 - week: 8
   day: 3
   lecture: "make"
-  slides: 
+  slides: Lec16
   screencast: 
   readings:
   - text: Minimal make

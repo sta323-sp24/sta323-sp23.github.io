@@ -23,7 +23,8 @@ options(
 
 knitr::opts_chunk$set(
   fig.align = "center", fig.retina = 2, dpi = 150,
-  out.width = "100%"
+  out.width = "100%",
+  warning = TRUE
 )
 
 library(dplyr)
@@ -472,23 +473,23 @@ In general, dplyr / dbplyr knows how to translate basic math, logical, and summa
 
 . . .
 
-::: {.medium}
+::: {.small}
 ```{r}
 #| error: True
-dbplyr::translate_sql(x == 1 & (y < 2 | z > 3))
-dbplyr::translate_sql(x ^ 2 < 10)
-dbplyr::translate_sql(x %% 2 == 10)
+con = dbplyr::simulate_dbi()
+dbplyr::translate_sql(x == 1 & (y < 2 | z > 3), con=con)
+dbplyr::translate_sql(x ^ 2 < 10, con=con)
+dbplyr::translate_sql(x %% 2 == 10, con=con)
 ```
 :::
 
 . . .
 
-::: {.medium}
+::: {.small}
 ```{r}
 #| error: True
-con = dbplyr::simulate_dbi()
-dbplyr::translate_sql(mean(x),con=con)
-dbplyr::translate_sql(mean(x, na.rm=TRUE),con=con)
+dbplyr::translate_sql(mean(x), con=con)
+dbplyr::translate_sql(mean(x, na.rm=TRUE), con=con)
 ```
 :::
 
@@ -537,7 +538,7 @@ There are two packages that implement this in R which take very different approa
 
 * [`tidyquery`](https://github.com/ianmcook/tidyquery) - this package parses your SQL code using the `queryparser` package and then translates the result into R / dplyr code.
 
-* [`sqldf`](https://github.com/ggrothendieck/sqldf) - transparently creates a database with teh data and then runs the query using that database. Defaults to SQLite but other backends are available.
+* [`sqldf`](https://github.com/ggrothendieck/sqldf) - transparently creates a database with data and then runs the query using that database. Defaults to SQLite but other backends are available.
 
 
 ## tidyquery

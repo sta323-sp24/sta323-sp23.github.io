@@ -230,7 +230,7 @@ schedule:
 - week: 10
   day: 5
   lecture: "SQL & Indexes"
-  slides: 
+  slides: Lec18
   screencast: 
   readings:
   - text: SQLite Syntax

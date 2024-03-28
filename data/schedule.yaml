@@ -257,7 +257,7 @@ schedule:
 - week: 11
   day: 5
   lecture: "bslib & dashboards"
-  slides: 
+  slides: Lec20
   screencast: 
   readings:
   - text: bslib

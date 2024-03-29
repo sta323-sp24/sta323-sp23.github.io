@@ -86,6 +86,48 @@ It facilitates:
    * The underlying UI components (e.g., cards, value boxes, sidebars, etc) are also designed to work in other contexts (e.g., in R Markdown).
 
 
+# Theming
+
+## Bootswatch
+
+Due to the ubiquity of Bootstrap a large amount of community effort has gone into developing custom themes - a large free collection of these are available at [bootswatch.com/](https://bootswatch.com/).
+
+<iframe data-src="https://bootswatch.com/" width="100%" height="450px" style="border:1px solid;border-radius: 5px;" data-external="1">
+</iframe>
+
+## `bs_theme()`
+
+Provides a high level interface to adjusting the theme for an entire Shiny app,
+
+* Change bootstrap version via `version` argument
+
+* Pick a bootswatch theme via `bootswatch` argument
+
+* Adjust basic color palette (`bg`, `fg`, `primary`, `secondary`, etc.)
+
+* Adjust fonts (`base_font`, `code_font`, `heading_font`, `font_scale`)
+
+* and more
+
+The object returned by `bs_theme()` can be passed to the `theme` argument of `fluidPage()` and similar page UI elements.
+
+. . .
+
+In a Shiny app dynamic theming can be enabled by including `bs_themer()` in the server function of your app.
+
+
+
+## thematic
+
+> Simplified theming of ggplot2, lattice, and {base} R graphics. In addition to providing a centralized approach to styling R graphics, thematic also enables automatic styling of R plots in Shiny, R Markdown, and RStudio.
+
+In the case of our flexdashboard (or other shiny app), all we need to do is to include a call to `thematic_shiny()` before the app is loaded. 
+
+- Using the value `"auto"` will attempt to resolve the `bg`, `fg`, `accent`, or `font` values at plot time.
+
+
+
+
 # bslib components
 
 ## Cards
@@ -468,45 +510,5 @@ page_navbar(
 )
 ```
 :::
-
-
-# Theming
-
-## Bootswatch
-
-Due to the ubiquity of Bootstrap a large amount of community effort has gone into developing custom themes - a large free collection of these are available at [bootswatch.com/](https://bootswatch.com/).
-
-<iframe data-src="https://bootswatch.com/" width="100%" height="450px" style="border:1px solid;border-radius: 5px;" data-external="1">
-</iframe>
-
-## `bs_theme()`
-
-Provides a high level interface to adjusting the theme for an entire Shiny app,
-
-* Change bootstrap version via `version` argument
-
-* Pick a bootswatch theme via `bootswatch` argument
-
-* Adjust basic color palette (`bg`, `fg`, `primary`, `secondary`, etc.)
-
-* Adjust fonts (`base_font`, `code_font`, `heading_font`, `font_scale`)
-
-* and more
-
-The object returned by `bs_theme()` can be passed to the `theme` argument of `fluidPage()` and similar page UI elements.
-
-. . .
-
-In a Shiny app dynamic theming can be enabled by including `bs_themer()` in the server function.
-
-
-
-## thematic
-
-> Simplified theming of ggplot2, lattice, and {base} R graphics. In addition to providing a centralized approach to styling R graphics, thematic also enables automatic styling of R plots in Shiny, R Markdown, and RStudio.
-
-In the case of our flexdashboard (or other shiny app), all we need to do is to include a call to `thematic_shiny()` before the app is loaded. 
-
-- Using the value `"auto"` will attempt to resolve the `bg`, `fg`, `accent`, or `font` values at plot time.
 
 

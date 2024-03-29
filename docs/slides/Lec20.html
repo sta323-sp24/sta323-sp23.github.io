@@ -1246,6 +1246,42 @@ Dr. Colin Rundel
 </ul>
 </section>
 <section>
+<section id="theming" class="title-slide slide level1 center">
+<h1>Theming</h1>
+
+</section>
+<section id="bootswatch" class="slide level2">
+<h2>Bootswatch</h2>
+<p>Due to the ubiquity of Bootstrap a large amount of community effort has gone into developing custom themes - a large free collection of these are available at <a href="https://bootswatch.com/">bootswatch.com/</a>.</p>
+<iframe data-src="https://bootswatch.com/" width="100%" height="450px" style="border:1px solid;border-radius: 5px;" data-external="1">
+</iframe>
+</section>
+<section id="bs_theme" class="slide level2">
+<h2><code>bs_theme()</code></h2>
+<p>Provides a high level interface to adjusting the theme for an entire Shiny app,</p>
+<ul>
+<li><p>Change bootstrap version via <code>version</code> argument</p></li>
+<li><p>Pick a bootswatch theme via <code>bootswatch</code> argument</p></li>
+<li><p>Adjust basic color palette (<code>bg</code>, <code>fg</code>, <code>primary</code>, <code>secondary</code>, etc.)</p></li>
+<li><p>Adjust fonts (<code>base_font</code>, <code>code_font</code>, <code>heading_font</code>, <code>font_scale</code>)</p></li>
+<li><p>and more</p></li>
+</ul>
+<p>The object returned by <code>bs_theme()</code> can be passed to the <code>theme</code> argument of <code>fluidPage()</code> and similar page UI elements.</p>
+<div class="fragment">
+<p>In a Shiny app dynamic theming can be enabled by including <code>bs_themer()</code> in the server function of your app.</p>
+</div>
+</section>
+<section id="thematic" class="slide level2">
+<h2>thematic</h2>
+<blockquote>
+<p>Simplified theming of ggplot2, lattice, and {base} R graphics. In addition to providing a centralized approach to styling R graphics, thematic also enables automatic styling of R plots in Shiny, R Markdown, and RStudio.</p>
+</blockquote>
+<p>In the case of our flexdashboard (or other shiny app), all we need to do is to include a call to <code>thematic_shiny()</code> before the app is loaded.</p>
+<ul>
+<li>Using the value <code>&quot;auto&quot;</code> will attempt to resolve the <code>bg</code>, <code>fg</code>, <code>accent</code>, or <code>font</code> values at plot time.</li>
+</ul>
+</section></section>
+<section>
 <section id="bslib-components" class="title-slide slide level1 center">
 <h1>bslib components</h1>
 
@@ -1653,51 +1689,15 @@ Dr. Colin Rundel
 </div>
 
 </div>
-</section><section id="page-navbar-output" class="slide level2 output-location-slide"><h2>Page navbar</h2><div class="cell output-location-slide" data-layout-align="center" height="625">
-<iframe src="out_html/unnamed-chunk-14.html" width="100%" height="625" data-external="1" scrolling="no">
-</iframe>
-</div></section></section>
-<section>
-<section id="theming" class="title-slide slide level1 center">
-<h1>Theming</h1>
-
-</section>
-<section id="bootswatch" class="slide level2">
-<h2>Bootswatch</h2>
-<p>Due to the ubiquity of Bootstrap a large amount of community effort has gone into developing custom themes - a large free collection of these are available at <a href="https://bootswatch.com/">bootswatch.com/</a>.</p>
-<iframe data-src="https://bootswatch.com/" width="100%" height="450px" style="border:1px solid;border-radius: 5px;" data-external="1">
-</iframe>
-</section>
-<section id="bs_theme" class="slide level2">
-<h2><code>bs_theme()</code></h2>
-<p>Provides a high level interface to adjusting the theme for an entire Shiny app,</p>
-<ul>
-<li><p>Change bootstrap version via <code>version</code> argument</p></li>
-<li><p>Pick a bootswatch theme via <code>bootswatch</code> argument</p></li>
-<li><p>Adjust basic color palette (<code>bg</code>, <code>fg</code>, <code>primary</code>, <code>secondary</code>, etc.)</p></li>
-<li><p>Adjust fonts (<code>base_font</code>, <code>code_font</code>, <code>heading_font</code>, <code>font_scale</code>)</p></li>
-<li><p>and more</p></li>
-</ul>
-<p>The object returned by <code>bs_theme()</code> can be passed to the <code>theme</code> argument of <code>fluidPage()</code> and similar page UI elements.</p>
-<div class="fragment">
-<p>In a Shiny app dynamic theming can be enabled by including <code>bs_themer()</code> in the server function.</p>
-</div>
-</section>
-<section id="thematic" class="slide level2">
-<h2>thematic</h2>
-<blockquote>
-<p>Simplified theming of ggplot2, lattice, and {base} R graphics. In addition to providing a centralized approach to styling R graphics, thematic also enables automatic styling of R plots in Shiny, R Markdown, and RStudio.</p>
-</blockquote>
-<p>In the case of our flexdashboard (or other shiny app), all we need to do is to include a call to <code>thematic_shiny()</code> before the app is loaded.</p>
-<ul>
-<li>Using the value <code>&quot;auto&quot;</code> will attempt to resolve the <code>bg</code>, <code>fg</code>, <code>accent</code>, or <code>font</code> values at plot time.</li>
-</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p>Sta 323 - Spring 2024</p>
 </div>
 </div>
-</section></section>
+</section><section id="page-navbar-output" class="slide level2 output-location-slide"><h2>Page navbar</h2><div class="cell output-location-slide" data-layout-align="center" height="625">
+<iframe src="out_html/unnamed-chunk-14.html" width="100%" height="625" data-external="1" scrolling="no">
+</iframe>
+</div></section></section>
     </div>
   </div>
 

@@ -271,7 +271,7 @@ schedule:
 - week: 12
   day: 3
   lecture: "Profiling & Parallelization"
-  slides: 
+  slides: Lec21
   screencast: 
   readings:
   - text: "parallel Vignettes"

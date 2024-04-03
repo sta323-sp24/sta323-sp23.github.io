@@ -99,11 +99,11 @@ summary(b, relative=TRUE)
 
 ## `t.test`
 
+::: {.small}
 > Imagine we have run 1000 experiments (rows), each of which collects data on 50 individuals (columns). The first 25 individuals in each experiment are assigned to group 1 and the rest to group 2.
 
 The goal is to calculate the t-statistic for each experiment comparing group 1 to group 2.
 
-::: {.small}
 ```{r}
 #| echo: false
 options(width=50)
@@ -147,7 +147,6 @@ Based on [Case study: t-test](http://adv-r.had.co.nz/Profiling.html#t-test) from
 ttest_formula = function(X, m) {
   for(i in 1:m) t.test(X[[2+i]] ~ X$group)$stat
 }
-
 system.time(ttest_formula(X,m))
 ```
 :::
@@ -159,7 +158,6 @@ system.time(ttest_formula(X,m))
 ttest_for = function(X, m) {
   for(i in 1:m) t.test(X[[2+i]][X$group == 1], X[[2+i]][X$group == 2])$stat
 }
-
 system.time(ttest_for(X,m))
 ```
 :::
@@ -174,7 +172,6 @@ ttest_apply = function(X) {
   }
   apply(X[,-(1:2)], 2, f, X$group)
 }
-
 system.time(ttest_apply(X))
 ```
 :::
@@ -202,7 +199,6 @@ ttest_hand_calc = function(X) {
   
     apply(X[,-(1:2)], 2, f, X$group)
 }
-
 system.time(ttest_hand_calc(X))
 ```
 :::
@@ -309,12 +305,40 @@ res
 
 Parallelized version of `lapply`
 
-::: {.medium}
+::: {.small}
 ```{r}
 system.time(rnorm(1e7))
+```
+:::
+
+. . .
+
+::: {.small}
+```{r}
 system.time(unlist(mclapply(1:10, function(x) rnorm(1e6), mc.cores = 2)))
+```
+:::
+
+. . .
+
+::: {.small}
+```{r}
 system.time(unlist(mclapply(1:10, function(x) rnorm(1e6), mc.cores = 4)))
+```
+:::
+
+. . .
+
+::: {.small}
+```{r}
 system.time(unlist(mclapply(1:10, function(x) rnorm(1e6), mc.cores = 8)))
+```
+:::
+
+. . .
+
+::: {.small}
+```{r}
 system.time(unlist(mclapply(1:10, function(x) rnorm(1e6), mc.cores = 10)))
 ```
 :::
@@ -383,21 +407,30 @@ getDoParWorkers()
 
 A slightly more powerful version of base `for` loops (think `for` with an `lapply` flavor). Combined with `%do%` or `%dopar%` for single or multicore execution.
 
+:::: {.columns .small}
+::: {.column width='50%'}
 ```{r}
 for(i in 1:10) {
   sqrt(i)
 }
+```
+:::
 
+::: {.column width='50%'}
+```{r}
 foreach(i = 1:5) %do% {
   sqrt(i)   
 }
 ```
+:::
+::::
+
 
 ## `foreach` - iterators
 
 `foreach` can iterate across more than one value, but it doesn't do length coercion
 
-:::: {.columns}
+:::: {.columns .small}
 ::: {.column width='50%'}
 ```{r}
 foreach(i = 1:5, j = 1:5) %do% {
@@ -487,6 +520,7 @@ d = d |> mutate(
 
 ::: {.small}
 ```{r}
+#| out-width: 75%
 ggplot(d, aes(x,y)) +
   geom_point(color="gray50") +
   geom_ribbon(
@@ -522,8 +556,6 @@ Optimal use of parallelization / multiple cores is hard, there isn't one best so
 ## Statistics and Linear Algebra
 
 An awful lot of statistics is at its core linear algebra.
-
-<br/>
 
 For example:
 

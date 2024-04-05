@@ -171,9 +171,9 @@ R has a rich package ecosystem for read/writing, manipulating, and analyzing geo
 
 * `rgeos` - ~~R interface to `geos` (Geometry Engine Open Source) library for querying and manipulating spatial data. Reading and writing WKT.~~ - **Deprecated**
 
-* `raster` - classes and tools for handling spatial raster data.
-
 * `sf` - Combines the functionality of `sp`, `rgdal`, and `rgeos` into a single package based on tidy simple features.
+
+* `raster` - classes and tools for handling spatial raster data.
 
 * `stars` - Reading, manipulating, writing and plotting spatiotemporal arrays (rasters)
 

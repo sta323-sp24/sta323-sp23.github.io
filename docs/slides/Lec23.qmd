@@ -80,8 +80,7 @@ ggplot(books, aes(x=volume, y=weight, color = cover)) +
 linear_reg()
 ```
 
-
-## Building a tidymodel
+. . .
 
 ```{r}
 linear_reg() |>
@@ -105,17 +104,12 @@ linear_reg() |>
 ```
 :::
 
-::: {.column width='50%'}
+::: {.column width='50%' .fragment}
 ```{r}
 lm(weight ~ volume * cover, data = books)
 ```
 :::
 ::::
-
-#
-
-![](imgs/hex_broom.png){fig-align="center" width="75%"}
-
 
 ## Tidy model objects
 
@@ -138,30 +132,53 @@ lm_b = lm(weight ~ volume * cover, data = books)
 :::: {.columns .small}
 ::: {.column width='50%'}
 ```{r}
-summary(lm_b)
+summary(lm_tm)
 ```
 :::
 
 ::: {.column width='50%'}
 ```{r}
-summary(lm_tm)
+summary(lm_b)
 ```
 :::
 ::::
 
-##
+#
+
+![](imgs/hex_broom.png){fig-align="center" width="75%"}
+
+
+
+
+## Tidy coefficients
+
+```{r}
+#| include: false
+options(width=50)
+```
+
+:::: {.columns .small}
+::: {.column width='50%'}
+```{r}
+broom::tidy(lm_tm)
+```
+:::
+
+::: {.column width='50%'}
+```{r}
+broom::tidy(lm_b)
+```
+:::
+::::
 
 ```{r}
 #| include: false
 options(width=85)
 ```
 
-```{r}
-broom::tidy(lm_tm)
-```
 
 
-## Tidy model statistics
+## Tidy statistics
 
 ::: {.small}
 ```{r}
@@ -178,7 +195,7 @@ broom::glance(lm_b)
 :::
 
 
-## Tidy model prediction
+## Tidy prediction
 
 ```{r}
 broom::augment(lm_tm, new_data = books)
@@ -346,7 +363,7 @@ More on combining these type of results later, see [`workflows`](https://workflo
 :::
 
 
-# Cross validation and Feature engineering
+# Cross validation and<br/>Feature engineering
 
 ## The Office & IMDB
 
@@ -414,6 +431,7 @@ set.seed(123)
 ## Feature engineering with dplyr
 
 ```{r}
+#| echo: false
 options(width=100)
 options(tibble.width=100)
 ```
@@ -477,8 +495,7 @@ summary(r)
 
 ## Adding features (month & day of week)
 
-:::: {.columns .small}
-::: {.column width='50%'}
+:::: {.small}
 ```{r}
 r = recipe(
   imdb_rating ~ ., data = office_train
@@ -486,13 +503,9 @@ r = recipe(
   update_role(title, new_role = "ID") |>
   step_date(air_date, features = c("dow", "month"))
 ```
-:::
-
-::: {.column width='50%'}
 ```{r}
 summary(r)
 ```
-:::
 ::::
 
 

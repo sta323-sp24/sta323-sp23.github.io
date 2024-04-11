@@ -1,6 +1,6 @@
 ---
 title: "Tidymodels"
-subtitle: "Lecture 22"
+subtitle: "Lecture 23"
 author: "Dr. Colin Rundel"
 footer: "Sta 323 - Spring 2024"
 format:

@@ -314,7 +314,7 @@ schedule:
 - week: 14
   day: 3
   lecture: "R Packages"
-  slides: 
+  slides: Lec25
   screencast:
   readings:
   - text: R Packages
@@ -341,6 +341,9 @@ schedule:
   - text: Seamless R and C++ Integration with Rcpp
     link: https://link.springer.com/book/10.1007/978-1-4614-6868-4
 
+- week: 15
+  day: 3
+  lecture: "<i>LDOC</i> - Project work session"
 
 - week: 16
   day: 2

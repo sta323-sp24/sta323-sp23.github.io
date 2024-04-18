@@ -331,7 +331,7 @@ schedule:
   day: 5
   lecture: "Rcpp"
   screencast: 
-  slides: 
+  slides: Lec26
   notes:
   readings:
   - text: Rcpp Gallery

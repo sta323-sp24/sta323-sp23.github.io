@@ -1036,11 +1036,7 @@ To generate draws from an $n$-dimensional multivate normal with mean $\underset{
 
     * most often we use $\boldsymbol{A} = \text{Chol}(\boldsymbol{\Sigma})$ where $\boldsymbol{A}$ is a lower triangular matrix.
 
-. . .
-
 * Draw $n$ iid unit normals, $N(0,1)$, as $\underset{n \times 1}{\boldsymbol{z}}$ 
-
-. . .
 
 * Obtain multivariate normal draws using
 $$ \underset{n \times 1}{\boldsymbol{y}} = \underset{n \times 1}{\boldsymbol{\mu}} + \underset{n \times n}{\boldsymbol{A}} \, \underset{n \times 1}{\boldsymbol{z}} $$

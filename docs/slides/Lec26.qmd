@@ -1012,6 +1012,20 @@ y_1\\ y_2\\ \vdots\\ y_n
 $$
 
 
+## Multivariate Normal Distribution - Sampling
+
+To generate draws from an $n$-dimensional multivate normal with mean $\underset{n \times 1}{\boldsymbol{\mu}}$ and covariance matrix $\underset{n \times n}{\boldsymbol{\Sigma}}$, 
+
+* Find a matrix $\underset{n \times n}{\boldsymbol{A}}$ such that $\boldsymbol{\Sigma} = \boldsymbol{A}\,\boldsymbol{A}^t$
+
+    * most often we use $\boldsymbol{A} = \text{Chol}(\boldsymbol{\Sigma})$ where $\boldsymbol{A}$ is a lower triangular matrix.
+
+* Draw $n$ iid unit normals, $N(0,1)$, as $\underset{n \times 1}{\boldsymbol{z}}$ 
+
+* Obtain multivariate normal draws using
+$$ \underset{n \times 1}{\boldsymbol{y}} = \underset{n \times 1}{\boldsymbol{\mu}} + \underset{n \times n}{\boldsymbol{A}} \, \underset{n \times 1}{\boldsymbol{z}} $$
+
+
 ## Multivariate Normal Distribution - Density
 
 For the $n$ dimensional multivate normal given on the last slide, its density is given by
@@ -1025,18 +1039,3 @@ and its log density is given by
 $$
 \log f\big(\boldsymbol{Y} | \boldsymbol{\mu}, \boldsymbol{\Sigma}\big) = -\frac{n}{2} \log 2\pi - \frac{1}{2} \log \det(\boldsymbol{\Sigma}) - \frac{1}{2} \underset{1 \times n}{(\boldsymbol{Y}-\boldsymbol{\mu})'} \underset{n \times n}{\boldsymbol{\Sigma}^{-1}} \underset{n \times 1}{(\boldsymbol{Y}-\boldsymbol{\mu})}
 $$
-
-## Multivariate Normal Distribution - Sampling
-
-To generate draws from an $n$-dimensional multivate normal with mean $\underset{n \times 1}{\boldsymbol{\mu}}$ and covariance matrix $\underset{n \times n}{\boldsymbol{\Sigma}}$, 
-
-. . .
-
-* Find a matrix $\underset{n \times n}{\boldsymbol{A}}$ such that $\boldsymbol{\Sigma} = \boldsymbol{A}\,\boldsymbol{A}^t$
-
-    * most often we use $\boldsymbol{A} = \text{Chol}(\boldsymbol{\Sigma})$ where $\boldsymbol{A}$ is a lower triangular matrix.
-
-* Draw $n$ iid unit normals, $N(0,1)$, as $\underset{n \times 1}{\boldsymbol{z}}$ 
-
-* Obtain multivariate normal draws using
-$$ \underset{n \times 1}{\boldsymbol{y}} = \underset{n \times 1}{\boldsymbol{\mu}} + \underset{n \times n}{\boldsymbol{A}} \, \underset{n \times 1}{\boldsymbol{z}} $$

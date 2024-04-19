@@ -123,6 +123,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> <span class="fu">rmvnorm</span>(<span class="dv">10000</span>, <span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">2</span>), Sigma)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lec26_notes_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bench<span class="sc">::</span><span class="fu">mark</span>(</span>
@@ -130,38 +137,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">10000</span>, <span class="at">mu =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">1000</span>), <span class="at">Sigma =</span> <span class="fu">diag</span>(<span class="dv">1</span>,<span class="dv">1000</span>,<span class="dv">1000</span>)),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">check=</span><span class="cn">FALSE</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Some expressions had a GC in every iteration; so filtering is
+disabled.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 6
+  expression                             min median `itr/sec` mem_alloc `gc/sec`
+  &lt;bch:expr&gt;                           &lt;bch&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+1 rmvnorm(10000, mu = rep(0, 1000), S… 385ms  387ms      2.58    83.9MB     1.29
+2 MASS::mvrnorm(10000, mu = rep(0, 10… 524ms  524ms      1.91   431.8MB     5.72</code></pre>
+</div>
 </div>
 </section>
 <section id="dmvnorm" class="level2">
 <h2 class="anchored" data-anchor-id="dmvnorm">dmvnorm</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::depends(RcppArmadillo)]]</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;RcppArmadillo.h&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>arma<span class="op">::</span>mat dmvnorm<span class="op">(</span>arma<span class="op">::</span>mat x<span class="op">,</span> arma<span class="op">::</span>vec mu<span class="op">,</span> arma<span class="op">::</span>mat Sigma<span class="op">,</span> <span class="dt">bool</span> use_log <span class="op">=</span> <span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">//unsigned int n = mu.n_elem;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> n_obs <span class="op">=</span> x<span class="op">.</span>n_cols<span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat X <span class="op">=</span> x <span class="op">-</span> mu <span class="op">*</span> arma<span class="op">::</span>ones<span class="op">&lt;</span>arma<span class="op">::</span>mat<span class="op">&gt;(</span><span class="dv">1</span><span class="op">,</span> n_obs<span class="op">);</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat L <span class="op">=</span> arma<span class="op">::</span>chol<span class="op">(</span>Sigma<span class="op">,</span> <span class="st">"lower"</span><span class="op">);</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat <span class="dt">L_inv_t</span> <span class="op">=</span> arma<span class="op">::</span>inv<span class="op">(</span>arma<span class="op">::</span>trimatl<span class="op">(</span>L<span class="op">)).</span>t<span class="op">();</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat XL <span class="op">=</span> X<span class="op">.</span>t<span class="op">()</span> <span class="op">*</span> <span class="dt">L_inv_t</span><span class="op">;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>vec XLLX <span class="op">=</span> arma<span class="op">::</span>sum<span class="op">(</span>XL <span class="op">%</span> XL<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>vec L_diag <span class="op">=</span> L<span class="op">.</span>diag<span class="op">();</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> norm <span class="op">=</span> pow<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> arma<span class="op">::</span>datum<span class="op">::</span>pi<span class="op">,</span> n<span class="op">)</span> <span class="op">*</span> sqrt<span class="op">(</span> arma<span class="op">::</span>prod<span class="op">(</span>arma<span class="op">::</span>square<span class="op">(</span>L_diag<span class="op">)));</span> </span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>use_log<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>XLLX<span class="op">/</span><span class="dv">2</span> <span class="op">-</span> log<span class="op">(</span>norm<span class="op">)/</span><span class="dv">2</span><span class="op">;</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> arma<span class="op">::</span>exp<span class="op">(-</span>XLLX<span class="op">/</span><span class="dv">2</span><span class="op">)</span> <span class="op">/</span> sqrt<span class="op">(</span>norm<span class="op">);</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>                                           </span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::depends(RcppArmadillo)]]</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;RcppArmadillo.h&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">// [[Rcpp::export]]</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>arma<span class="op">::</span>mat dmvnorm<span class="op">(</span>arma<span class="op">::</span>mat x<span class="op">,</span> arma<span class="op">::</span>vec mu<span class="op">,</span> arma<span class="op">::</span>mat Sigma<span class="op">,</span> <span class="dt">bool</span> use_log <span class="op">=</span> <span class="kw">true</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">//unsigned int n = mu.n_elem;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unsigned</span> <span class="dt">int</span> n_obs <span class="op">=</span> x<span class="op">.</span>n_cols<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat X <span class="op">=</span> x <span class="op">-</span> mu <span class="op">*</span> arma<span class="op">::</span>ones<span class="op">&lt;</span>arma<span class="op">::</span>mat<span class="op">&gt;(</span><span class="dv">1</span><span class="op">,</span> n_obs<span class="op">);</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat L <span class="op">=</span> arma<span class="op">::</span>chol<span class="op">(</span>Sigma<span class="op">,</span> <span class="st">"lower"</span><span class="op">);</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat <span class="dt">L_inv_t</span> <span class="op">=</span> arma<span class="op">::</span>inv<span class="op">(</span>arma<span class="op">::</span>trimatl<span class="op">(</span>L<span class="op">)).</span>t<span class="op">();</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>mat XL <span class="op">=</span> X<span class="op">.</span>t<span class="op">()</span> <span class="op">*</span> <span class="dt">L_inv_t</span><span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>vec XLLX <span class="op">=</span> arma<span class="op">::</span>sum<span class="op">(</span>XL <span class="op">%</span> XL<span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  arma<span class="op">::</span>vec L_diag <span class="op">=</span> L<span class="op">.</span>diag<span class="op">();</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">double</span> norm <span class="op">=</span> pow<span class="op">(</span><span class="dv">2</span> <span class="op">*</span> arma<span class="op">::</span>datum<span class="op">::</span>pi<span class="op">,</span> n_obs<span class="op">)</span> <span class="op">*</span> sqrt<span class="op">(</span> arma<span class="op">::</span>prod<span class="op">(</span>arma<span class="op">::</span>square<span class="op">(</span>L_diag<span class="op">)));</span> </span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>use_log<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>XLLX<span class="op">/</span><span class="dv">2</span> <span class="op">-</span> log<span class="op">(</span>norm<span class="op">)/</span><span class="dv">2</span><span class="op">;</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> arma<span class="op">::</span>exp<span class="op">(-</span>XLLX<span class="op">/</span><span class="dv">2</span><span class="op">)</span> <span class="op">/</span> sqrt<span class="op">(</span>norm<span class="op">);</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span>                                           </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmvnorm</span>(<span class="fu">matrix</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>), <span class="dv">0</span>, <span class="fu">matrix</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmvnorm</span>(<span class="fu">matrix</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>), <span class="dv">0</span>, <span class="fu">matrix</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]
+[1,] -2.756816
+[2,] -2.756816
+[3,] -2.756816</code></pre>
+</div>
 </div>
 </section>
 
